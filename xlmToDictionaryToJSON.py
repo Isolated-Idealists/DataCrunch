@@ -9,21 +9,15 @@ import boto3
 from collections import Counter
 from rake_nltk import Rake, Metric
 
-REGION = 'ap-southeast-2'
 
 
 text_file = open("common_words.txt", "r")
 common_words = text_file.read().split('\n')
 # print(common_words)
 
-def detect_key_phraes(text, language_code):
-    comprehend = boto3.client('comprehend', region_name=REGION)
-    response = comprehend.detect_key_phrases(Text=text, LanguageCode=language_code)
-    return response
 
 
-def utf8len(s):
-    return len(s.encode('utf-8'))
+
 
 TAG_RE = re.compile(r'<[^>]+>')
 def remove_tags(text):
@@ -55,7 +49,19 @@ for x in progressbar(range(41731, 41741)):
 
                 dictionary[child_of_root.tag] = content_dictionary
             else:
-                dictionary[child_of_root.tag] = child_of_root.text
+                if child_of_root.tag == "transcript-id":
+                    dictionary["transcriptId"] = child_of_root.text
+                elif child_of_root.tag == "prime-minister":
+                    dictionary["primeMinister"] = child_of_root.text
+                elif child_of_root.tag == "period-of-service":
+                    dictionary["periodOfService"] = child_of_root.text
+                elif child_of_root.tag == "release-date":
+                    dictionary["releaseDate"] = child_of_root.text
+                elif child_of_root.tag == "release-type":
+                    dictionary["releaseType"] = child_of_root.text
+                else:
+
+                    dictionary[child_of_root.tag] = child_of_root.text
 
     fileData.append(dictionary.copy())
 
