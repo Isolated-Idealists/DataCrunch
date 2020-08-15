@@ -20,7 +20,7 @@ TAG_RE = re.compile(r'<[^>]+>')
 def remove_tags(text):
     return TAG_RE.sub('', text)
 
-for x in progressbar(range(1, 1000)):
+for x in progressbar(range(1, 2)):
     URL = 'https://pmtranscripts.pmc.gov.au/query?transcript=' + str(x)
     tree = ET.fromstring(requests.get(URL).text)
 
@@ -64,9 +64,9 @@ print(final)
 
 
 #
-final.to_json (r'C:\Users\mklocker\PycharmProjects\govHack2020\DataCrunch\basicScrape.json')
+final.to_json (r'C:\Users\mklocker\PycharmProjects\govHack2020\DataCrunch\basicScrape1.json')
 #
 #
-with open('basicScrape.json', 'r') as json_file:
+with open('basicScrape1.json', 'r') as json_file:
     json_object = json.load(json_file)
     print(json.dumps(json_object, indent=1))

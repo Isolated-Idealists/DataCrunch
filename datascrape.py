@@ -18,7 +18,7 @@ TAG_RE = re.compile(r'<[^>]+>')
 def remove_tags(text):
     return TAG_RE.sub('', text)
 
-for x in range(1, 10):
+for x in range(1, 2):
     URL = 'https://pmtranscripts.pmc.gov.au/query?transcript=' + str(x)
     tree = ET.fromstring(requests.get(URL).text)
 
@@ -59,13 +59,13 @@ final.reset_index(drop=True, inplace=True)
 
 # print(final['content'])
 
-# final.to_csv(CSV_NAME)
+# # final.to_csv(CSV_NAME)
+# print(final)
+# final.set_index('transcript-id', inplace=True)
 print(final)
-final.set_index('transcript-id', inplace=True)
-print(final)
 
 
 
-final.to_json (r'C:\Users\mklocker\PycharmProjects\govHack2020\Export_DataFrame.json')
+final.to_json (r'C:\Users\mklocker\PycharmProjects\govHack2020\DataCrunch\Export_DataFrame.json')
 
 
