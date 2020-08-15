@@ -69,6 +69,3 @@ print(final)
 final.to_json (r'C:\Users\mklocker\PycharmProjects\govHack2020\Export_DataFrame.json')
 
 
-with open('Export_DataFrame.json', 'r') as json_file:
-    json_object = json.load(json_file)
-    print(json.dumps(json_object, indent=1))
