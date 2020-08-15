@@ -1,0 +1,1 @@
+{"ErrorCode": "UNSUPPORTED_ENCODING", "ErrorMessage": "Document is not in utf-8 format and all subsequent lines are ignored.", "File": "myfile.txt"}

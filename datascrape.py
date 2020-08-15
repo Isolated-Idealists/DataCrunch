@@ -3,6 +3,8 @@ import requests
 import pandas as pd
 import re
 import json
+from progressbar import progressbar
+
 
 pd.set_option('display.max_rows', 500)
 pd.set_option('display.max_columns', 500)
@@ -18,7 +20,7 @@ TAG_RE = re.compile(r'<[^>]+>')
 def remove_tags(text):
     return TAG_RE.sub('', text)
 
-for x in range(1, 2):
+for x in progressbar(range(41731, 41741)):
     URL = 'https://pmtranscripts.pmc.gov.au/query?transcript=' + str(x)
     tree = ET.fromstring(requests.get(URL).text)
 
@@ -66,6 +68,6 @@ print(final)
 
 
 
-final.to_json (r'C:\Users\mklocker\PycharmProjects\govHack2020\DataCrunch\Export_DataFrame.json')
+# final.to_json (r'C:\Users\mklocker\PycharmProjects\govHack2020\DataCrunch\Export_DataFrame.json')
 
 
